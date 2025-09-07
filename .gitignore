@@ -1,0 +1,35 @@
+# Visual Studio build folders
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+# Visual Studio specific
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Database files (don’t put local DB in git)
+*.mdf
+*.ldf
+
+# Logs
+*.log
+
+# Other temp and cache files
+*.dbmdl
+*.bak
+*.tmp
+*.cache
+*.pdb
+
+# Compiled binaries
+*.exe
+*.dll
+*.zip
