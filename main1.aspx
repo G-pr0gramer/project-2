@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="main1.aspx.cs" Inherits="sazegar_project.main1" %>
+
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <!DOCTYPE html>
 
@@ -31,91 +32,115 @@
                             </div>
                     </asp:LinkButton>
                 </div>
-               
-                 
-                   <asp:ScriptManager ID="ScriptManager1" runat="server" />
-            
+
+
+                <asp:ScriptManager ID="ScriptManager1" runat="server" />
+
 
             </div>
-           
-             <asp:Panel ID="pnlCategories" runat="server" CssClass="content-panel" Visible="false">
-     <h3>مدیریت دسته بندی‌ها</h3>
-         <div class="search-container">
-        <div class="input-text col-md-6">
-            <asp:Label ID="Label1" runat="server" Text="یک عبارت بنویسید:"></asp:Label>
-            <asp:TextBox ID="TextBox1" runat="server" CssClass="input form form-control"></asp:TextBox>
-        </div>
-        <div class="buttons col-md-6">
-            <asp:Button ID="Button1" runat="server" Text=" نمایش همه " CssClass="btn btn-secondary" />
-            <asp:Button ID="Button2" runat="server" Text="جتسجو" CssClass="btn btn-primary" />
-        </div>
-    </div>
-                                 <asp:LinkButton ID="db_pro" runat="server" Text="افزودن محصولات"  CssClass="btn btn-success" OnClick="db_pro_click"> 
-</asp:LinkButton>
-                 </asp:Panel>
-                
+
+            <asp:Panel ID="pnlCategories" runat="server" CssClass="content-panel" Visible="false">
+                <h3>مدیریت دسته بندی‌ها</h3>
+                <div class="search-container">
+                    <div class="input-text col-md-6">
+                        <asp:Label ID="Label1" runat="server" Text="یک عبارت بنویسید:"></asp:Label>
+                        <asp:TextBox ID="TextBox1" runat="server" CssClass="input form form-control"></asp:TextBox>
+                    </div>
+                    <div class="buttons col-md-6">
+                        <asp:Button ID="Button1" runat="server" Text=" نمایش همه " CssClass="btn btn-secondary" />
+                        <asp:Button ID="Button2" runat="server" Text="جتسجو" CssClass="btn btn-primary" />
+                    </div>
+                </div>
+                <asp:LinkButton ID="db_pro" runat="server" Text="افزودن محصولات" CssClass="btn btn-success" OnClick="db_pro_click"> 
+                </asp:LinkButton>
+            </asp:Panel>
+
             <asp:Panel ID="pnlinsert" runat="server" CssClass="content-panel" Visible="false">
-                                 <div style="margin-top: 50px;">
-                  <h3>افزودن محصول به جدول دیتابیس</h3>
-                 <div style="display: flex;justify-content: start; gap: 10px; margin-top:20px">
-                    <div>
-    
-</div>
-                     <asp:TextBox ID="textbox6" runat="server" CssClass="pro-name-input  form-control"></asp:TextBox>
-                     <asp:Button ID="insertb" runat="server" Text="افزودن محصول"  CssClass="btn btn-success" OnClick="btnInsert_Click" />          
-                 </div>
-                     </div>
-            </asp:Panel>
- <asp:Panel ID="pnlBrands" runat="server" CssClass="content-panel" Visible="false">
-     <h3>مدیریت  ‌برندها</h3>
-      <div class="mid-content">
-     <div class="mid-main-content">
-         <div class="col-md-4">
-             <asp:Button ID="Button3" runat="server" Text="افزودن" CssClass="btn btn-success" />
-         </div>
-         <div class="col-md-4">
-             <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form form-control" />
-         </div>
-         <div class="col-md-4" style="display: flex; flex-direction: column; align-items: end;">
-             <p style="margin: 0;">
-                 دریافت اطلاعات کالا
-             </p>
-             <img src="pic/logo.png" alt="Alternate Text" style="width: 30px; height: 30px;" />
-         </div>
-     </div>
- </div>
- </asp:Panel>
- <asp:Panel ID="pnlProducts" runat="server" CssClass="content-panel" Visible="false">
-     <h3>مدیریت کالاها</h3>
-                 <div class="input-section" style="margin-top: 60px;">
-                <div class="input-section-content">
+                <div style="margin-top: 50px;">
+                    <h3>افزودن محصول به جدول دیتابیس</h3>
+                    <div style="margin-top: 20px; display:flex;">
+                        <div class="col-md-4">
+                           
+                                <label>نام محصول</label>
+                                <asp:TextBox ID="pronameinput" runat="server" CssClass="pro-name-input  form-control"></asp:TextBox>
+                                <label>دسته بندی </label>
+                                <asp:TextBox ID="procategoryinput" runat="server" CssClass="pro-name-input  form-control"></asp:TextBox>
+                                <label>عکس محصول</label>
+                              <asp:FileUpload ID="image" runat="server" CssClass="pro-name-input" />
+                          
+                        </div>
+                        <div class="col-md-4">
+                            <label>نام برند</label>
+                            <asp:TextBox ID="probrandinput" runat="server" CssClass="pro-name-input  form-control"></asp:TextBox>
+                            <label>تامین کننده</label>
+                            <asp:TextBox ID="prosupplierinput" runat="server" CssClass="pro-name-input  form-control"></asp:TextBox>
+                        </div>
+                        <div class="col-md-4">
+                            <div>
+
+<label>تعداد </label>
+<asp:TextBox ID="stock" runat="server" CssClass="pro-name-input  form-control"></asp:TextBox>
+<div>
+    <label>وضعیت</label>
+    <asp:TextBox ID="status" runat="server" CssClass="pro-name-input  form-control"></asp:TextBox>
+
+                        </div>
+
+                                <asp:Button ID="insertb" runat="server" Text="افزودن محصول" CssClass="insertbutt btn btn-success" OnClick="btnInsert_Click" />
+                    </div>
                     
-                    
-                    <telerik:RadGrid ID="RadGrid1" runat="server" AutoGenerateColumns="False" AllowPaging="true" PageSize="5" AllowSorting="true" AllowFilteringByColumn="true">
-    <MasterTableView DataKeyNames="Id" NoMasterRecordsText="رکوردی برای نمایش وجود ندارد">
-        <Columns>
-            <telerik:GridBoundColumn DataField="Id" HeaderText="شناسه" UniqueName="Id" />
-            <telerik:GridImageColumn DataImageUrlFields="Image" HeaderText="تصویر" UniqueName="Image" ImageHeight="50px" ImageWidth="50px"/>
-            <telerik:GridBoundColumn DataField="ProductName" HeaderText="نام کالا" UniqueName="ProductName" />
-            <telerik:GridBoundColumn DataField="Brand" HeaderText="نام برند" UniqueName="Brand" />
-            <telerik:GridBoundColumn DataField="Category" HeaderText="نام دسته بندی" UniqueName="Category" />
-            <telerik:GridBoundColumn DataField="Supplier" HeaderText="تأمین کننده" UniqueName="Supplier" />
-            <telerik:GridBoundColumn DataField="Stock" HeaderText="موجودی" UniqueName="Stock" />
-            <telerik:GridBoundColumn DataField="Status" HeaderText="وضعیت" UniqueName="Status" />
-            <telerik:GridButtonColumn CommandName="Edit" Text="ویرایش" UniqueName="EditColumn" />
-            <telerik:GridButtonColumn CommandName="Delete" Text="حذف" UniqueName="DeleteColumn" />
-        </Columns>
-    </MasterTableView>
-</telerik:RadGrid>
+                </div>
             </asp:Panel>
-            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:productsConnectionString %>" SelectCommand="SELECT * FROM [pro-name]" InsertCommand="INSERT INTO [pro-name] ([name]) VALUES (@name)" >
+            <asp:Panel ID="pnlBrands" runat="server" CssClass="content-panel" Visible="false">
+                <h3>مدیریت  ‌برندها</h3>
+                <div class="mid-content">
+                    <div class="mid-main-content">
+                        <div class="col-md-4">
+                            <asp:Button ID="Button3" runat="server" Text="افزودن" CssClass="btn btn-success" />
+                        </div>
+                        <div class="col-md-4">
+                            <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form form-control" />
+                        </div>
+                        <div class="col-md-4" style="display: flex; flex-direction: column; align-items: end;">
+                            <p style="margin: 0;">
+                                دریافت اطلاعات کالا
+                            </p>
+                            <img src="pic/logo.png" alt="Alternate Text" style="width: 30px; height: 30px;" />
+                        </div>
+                    </div>
+                </div>
+            </asp:Panel>
+            <asp:Panel ID="pnlProducts" runat="server" CssClass="content-panel" Visible="false">
+                <h3>مدیریت کالاها</h3>
+                <div class="input-section" style="margin-top: 60px;">
+                    <div class="input-section-content">
+
+
+                        <telerik:RadGrid ID="RadGrid1" OnItemCommand="RadGrid1_ItemCommand" runat="server" AutoGenerateColumns="False" AllowPaging="true" PageSize="5" AllowSorting="true" AllowFilteringByColumn="true">
+                            <MasterTableView DataKeyNames="Id" NoMasterRecordsText="رکوردی برای نمایش وجود ندارد">
+                                <Columns>
+                                    <telerik:GridBoundColumn DataField="Id" HeaderText="شناسه" UniqueName="Id" />
+                                    <telerik:GridImageColumn DataImageUrlFields="image" HeaderText="تصویر" UniqueName="Image" ImageHeight="50px" ImageWidth="50px" />
+                                    <telerik:GridBoundColumn DataField="name" HeaderText="نام کالا" UniqueName="ProductName" />
+                                    <telerik:GridBoundColumn DataField="brand" HeaderText="نام برند" UniqueName="Brand" />
+                                    <telerik:GridBoundColumn DataField="category" HeaderText="نام دسته بندی" UniqueName="Category" />
+                                    <telerik:GridBoundColumn DataField="supplier" HeaderText="تأمین کننده" UniqueName="Supplier" />
+                                    <telerik:GridBoundColumn DataField="stock" HeaderText="موجودی" UniqueName="Stock" />
+                                    <telerik:GridBoundColumn DataField="status" HeaderText="وضعیت" UniqueName="Status" />
+                                    <telerik:GridButtonColumn CommandName="Edit" Text="ویرایش" UniqueName="EditColumn" />
+                                    <telerik:GridButtonColumn CommandName="Delete" Text="حذف" UniqueName="DeleteColumn" />
+                                </Columns>
+                            </MasterTableView>
+                        </telerik:RadGrid>
+            </asp:Panel>
+            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:productsConnectionString %>" SelectCommand="SELECT * FROM [pro-name]" InsertCommand="INSERT INTO [pro-name] ([name]) VALUES (@name)">
                 <InsertParameters>
-        <asp:Parameter Name="name" Type="String" />
-    </InsertParameters>
+                    <asp:Parameter Name="name" Type="String" />
+                </InsertParameters>
             </asp:SqlDataSource>
         </div>
-            
+
     </form>
-   
+
 </body>
 </html>

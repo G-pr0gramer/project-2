@@ -123,13 +123,67 @@ namespace sazegar_project
         protected global::System.Web.UI.WebControls.Panel pnlinsert;
 
         /// <summary>
-        /// textbox6 control.
+        /// pronameinput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textbox6;
+        protected global::System.Web.UI.WebControls.TextBox pronameinput;
+
+        /// <summary>
+        /// procategoryinput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox procategoryinput;
+
+        /// <summary>
+        /// image control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload image;
+
+        /// <summary>
+        /// probrandinput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox probrandinput;
+
+        /// <summary>
+        /// prosupplierinput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox prosupplierinput;
+
+        /// <summary>
+        /// stock control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox stock;
+
+        /// <summary>
+        /// status control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox status;
 
         /// <summary>
         /// insertb control.

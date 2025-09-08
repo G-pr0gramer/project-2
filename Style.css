@@ -68,5 +68,9 @@ th {
     height:24px;
 }
 .pro-name-input {
-    width: 25%;
+    width: 80% !important;
+}
+.insertbutt {
+    margin-top: 50px;
+    margin-right: 170px;
 }
