@@ -50,7 +50,22 @@
             <asp:Button ID="Button2" runat="server" Text="جتسجو" CssClass="btn btn-primary" />
         </div>
     </div>
- </asp:Panel>
+                                 <asp:LinkButton ID="db_pro" runat="server" Text="افزودن محصولات"  CssClass="btn btn-success" OnClick="db_pro_click"> 
+</asp:LinkButton>
+                 </asp:Panel>
+                
+            <asp:Panel ID="pnlinsert" runat="server" CssClass="content-panel" Visible="false">
+                                 <div style="margin-top: 50px;">
+                  <h3>افزودن محصول به جدول دیتابیس</h3>
+                 <div style="display: flex;justify-content: start; gap: 10px; margin-top:20px">
+                    <div>
+    
+</div>
+                     <asp:TextBox ID="textbox6" runat="server" CssClass="pro-name-input  form-control"></asp:TextBox>
+                     <asp:Button ID="insertb" runat="server" Text="افزودن محصول"  CssClass="btn btn-success" OnClick="btnInsert_Click" />          
+                 </div>
+                     </div>
+            </asp:Panel>
  <asp:Panel ID="pnlBrands" runat="server" CssClass="content-panel" Visible="false">
      <h3>مدیریت  ‌برندها</h3>
       <div class="mid-content">
@@ -92,8 +107,12 @@
         </Columns>
     </MasterTableView>
 </telerik:RadGrid>
- </asp:Panel>
-            
+            </asp:Panel>
+            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:productsConnectionString %>" SelectCommand="SELECT * FROM [pro-name]" InsertCommand="INSERT INTO [pro-name] ([name]) VALUES (@name)" >
+                <InsertParameters>
+        <asp:Parameter Name="name" Type="String" />
+    </InsertParameters>
+            </asp:SqlDataSource>
         </div>
             
     </form>

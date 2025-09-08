@@ -18,6 +18,11 @@ namespace sazegar_project
                 RadGrid1.DataBind();
             }
         }
+        protected void btnInsert_Click(object sender, EventArgs e)
+        {
+            SqlDataSource2.InsertParameters["name"].DefaultValue = textbox6.Text;
+            SqlDataSource2.Insert();
+        }
         private DataTable GetSampleData()
         {
             DataTable dt = new DataTable();
@@ -40,6 +45,7 @@ namespace sazegar_project
             pnlCategories.Visible = true;
             pnlBrands.Visible = false;
             pnlProducts.Visible = false;
+            pnlinsert.Visible = false;
         }
 
         protected void btnBrands_Click(object sender, EventArgs e)
@@ -47,6 +53,14 @@ namespace sazegar_project
             pnlCategories.Visible = false;
             pnlBrands.Visible = true;
             pnlProducts.Visible = false;
+            pnlinsert.Visible = false;
+        }
+        protected void db_pro_click(object sender, EventArgs e)
+        {
+            pnlCategories.Visible = false;
+            pnlBrands.Visible = false;
+            pnlProducts.Visible = false;
+            pnlinsert.Visible = true;
         }
 
         protected void btnProducts_Click(object sender, EventArgs e)
@@ -54,6 +68,7 @@ namespace sazegar_project
             pnlCategories.Visible = false;
             pnlBrands.Visible = false;
             pnlProducts.Visible = true;
+            pnlinsert.Visible = false;
         }
     }
 }
