@@ -117,9 +117,9 @@
 
 
                         <telerik:RadGrid ID="RadGrid1" OnItemCommand="RadGrid1_ItemCommand" runat="server" AutoGenerateColumns="False" AllowPaging="true" PageSize="5" AllowSorting="true" AllowFilteringByColumn="true">
-                            <MasterTableView DataKeyNames="Id" NoMasterRecordsText="رکوردی برای نمایش وجود ندارد">
+                            <MasterTableView DataKeyNames="id" NoMasterRecordsText="رکوردی برای نمایش وجود ندارد">
                                 <Columns>
-                                    <telerik:GridBoundColumn DataField="Id" HeaderText="شناسه" UniqueName="Id" />
+                                    <telerik:GridBoundColumn DataField="id" HeaderText="شناسه" UniqueName="Id" />
                                     <telerik:GridImageColumn DataImageUrlFields="image" HeaderText="تصویر" UniqueName="Image" ImageHeight="50px" ImageWidth="50px" />
                                     <telerik:GridBoundColumn DataField="name" HeaderText="نام کالا" UniqueName="ProductName" />
                                     <telerik:GridBoundColumn DataField="brand" HeaderText="نام برند" UniqueName="Brand" />
@@ -127,15 +127,23 @@
                                     <telerik:GridBoundColumn DataField="supplier" HeaderText="تأمین کننده" UniqueName="Supplier" />
                                     <telerik:GridBoundColumn DataField="stock" HeaderText="موجودی" UniqueName="Stock" />
                                     <telerik:GridBoundColumn DataField="status" HeaderText="وضعیت" UniqueName="Status" />
-                                    <telerik:GridButtonColumn CommandName="Edit" Text="ویرایش" UniqueName="EditColumn" />
+                                    <telerik:GridEditCommandColumn ButtonType="PushButton" EditText="ویرایش" UpdateText="ذخیره" CancelText="انصراف"/>
                                     <telerik:GridButtonColumn CommandName="Delete" Text="حذف" UniqueName="DeleteColumn" />
                                 </Columns>
                             </MasterTableView>
                         </telerik:RadGrid>
             </asp:Panel>
-            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:productsConnectionString %>" SelectCommand="SELECT * FROM [pro-name]" InsertCommand="INSERT INTO [pro-name] ([name]) VALUES (@name)">
+            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:productsConnectionString %>" SelectCommand="SELECT * FROM proname" InsertCommand="INSERT INTO proname (name, category, brand, supplier, stock, status, image) 
+                     VALUES (@name, @category, @brand, @supplier, @stock, @status, @image)">
                 <InsertParameters>
                     <asp:Parameter Name="name" Type="String" />
+                    
+    <asp:Parameter Name="category" Type="String" />
+    <asp:Parameter Name="brand" Type="String" />
+    <asp:Parameter Name="supplier" Type="String" />
+    <asp:Parameter Name="stock" Type="Int32" />
+    <asp:Parameter Name="status" Type="String" />
+    <asp:Parameter Name="image" Type="String" />
                 </InsertParameters>
             </asp:SqlDataSource>
         </div>
