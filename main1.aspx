@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="main1.aspx.cs" Inherits="sazegar_project.main1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="main1.aspx.cs" Inherits="sazegar_project.main1" EnableEventValidation="false" %>
 
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <!DOCTYPE html>
@@ -110,24 +110,42 @@
                     </div>
                 </div>
             </asp:Panel>
+            <asp:Panel ID="pnlEdit" runat="server" CssClass="content-panel" Visible="false">
+    <h3>ویرایش محصول</h3>
+    <asp:HiddenField ID="hfEditId" runat="server" />
+    <label>نام محصول</label>
+    <asp:TextBox ID="txtEditName" runat="server" CssClass="form-control" />
+    <label>دسته بندی</label>
+    <asp:TextBox ID="txtEditCategory" runat="server" CssClass="form-control" />
+    <label>برند</label>
+    <asp:TextBox ID="txtEditBrand" runat="server" CssClass="form-control" />
+    <label>تأمین کننده</label>
+    <asp:TextBox ID="txtEditSupplier" runat="server" CssClass="form-control" />
+    <label>موجودی</label>
+    <asp:TextBox ID="txtEditStock" runat="server" CssClass="form-control" />
+    <label>وضعیت</label>
+    <asp:TextBox ID="txtEditStatus" runat="server" CssClass="form-control" />
+    <asp:Button ID="btnSaveEdit" runat="server" Text="ذخیره تغییرات" OnClick="btnSaveEdit_Click" CssClass="btn btn-primary" />
+</asp:Panel>
             <asp:Panel ID="pnlProducts" runat="server" CssClass="content-panel" Visible="false">
                 <h3>مدیریت کالاها</h3>
                 <div class="input-section" style="margin-top: 60px;">
                     <div class="input-section-content">
 
 
-                        <telerik:RadGrid ID="RadGrid1" OnItemCommand="RadGrid1_ItemCommand" runat="server" AutoGenerateColumns="False" AllowPaging="true" PageSize="5" AllowSorting="true" AllowFilteringByColumn="true">
-                            <MasterTableView DataKeyNames="id" NoMasterRecordsText="رکوردی برای نمایش وجود ندارد">
+                        <telerik:RadGrid ID="RadGrid1" OnItemCommand="RadGrid1_ItemCommand" runat="server" AutoGenerateColumns="False" AllowPaging="true" PageSize="5" AllowSorting="true" AllowFilteringByColumn="true" >
+                            <MasterTableView DataKeyNames="id" NoMasterRecordsText="رکوردی برای نمایش وجود ندارد" >
                                 <Columns>
                                     <telerik:GridBoundColumn DataField="id" HeaderText="شناسه" UniqueName="Id" />
                                     <telerik:GridImageColumn DataImageUrlFields="image" HeaderText="تصویر" UniqueName="Image" ImageHeight="50px" ImageWidth="50px" />
-                                    <telerik:GridBoundColumn DataField="name" HeaderText="نام کالا" UniqueName="ProductName" />
-                                    <telerik:GridBoundColumn DataField="brand" HeaderText="نام برند" UniqueName="Brand" />
-                                    <telerik:GridBoundColumn DataField="category" HeaderText="نام دسته بندی" UniqueName="Category" />
-                                    <telerik:GridBoundColumn DataField="supplier" HeaderText="تأمین کننده" UniqueName="Supplier" />
-                                    <telerik:GridBoundColumn DataField="stock" HeaderText="موجودی" UniqueName="Stock" />
-                                    <telerik:GridBoundColumn DataField="status" HeaderText="وضعیت" UniqueName="Status" />
-                                    <telerik:GridEditCommandColumn ButtonType="PushButton" EditText="ویرایش" UpdateText="ذخیره" CancelText="انصراف"/>
+                                    <telerik:GridBoundColumn DataField="name" HeaderText="نام کالا" UniqueName="name" />
+                                    <telerik:GridBoundColumn DataField="brand" HeaderText="نام برند" UniqueName="brand" />
+                                    <telerik:GridBoundColumn DataField="category" HeaderText="نام دسته بندی" UniqueName="category" />
+                                    <telerik:GridBoundColumn DataField="supplier" HeaderText="تأمین کننده" UniqueName="supplier" />
+                                    <telerik:GridBoundColumn DataField="stock" HeaderText="موجودی" UniqueName="stock" />
+                                    <telerik:GridBoundColumn DataField="status" HeaderText="وضعیت" UniqueName="status" />
+                                    <telerik:GridButtonColumn CommandName="CustomEdit" Text="ویرایش" UniqueName="CustomEdit" />
+
                                     <telerik:GridButtonColumn CommandName="Delete" Text="حذف" UniqueName="DeleteColumn" />
                                 </Columns>
                             </MasterTableView>
@@ -145,6 +163,17 @@
     <asp:Parameter Name="status" Type="String" />
     <asp:Parameter Name="image" Type="String" />
                 </InsertParameters>
+
+                <UpdateParameters>
+        <asp:Parameter Name="id" Type="Int32" />
+        <asp:Parameter Name="name" Type="String" />
+        <asp:Parameter Name="category" Type="String" />
+        <asp:Parameter Name="brand" Type="String" />
+        <asp:Parameter Name="supplier" Type="String" />
+        <asp:Parameter Name="stock" Type="Int32" />
+        <asp:Parameter Name="status" Type="String" />
+       
+    </UpdateParameters>
             </asp:SqlDataSource>
         </div>
 

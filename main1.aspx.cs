@@ -19,29 +19,19 @@ namespace sazegar_project
         {
             if (!IsPostBack)
             {
-                RadGrid1.DataSource = GetSampleData();
-
                 BindGrid();
-                switch (ActivePanel)
-                {
-                    case "Products":
-                        pnlProducts.Visible = true;
-                        break;
-                    case "Categories":
-                        pnlCategories.Visible = true;
-                        break;
-                    case "Brands":
-                        pnlBrands.Visible = true;
-                        break;
-                    case "Insert":
-                        pnlinsert.Visible = true;
-                        break;
-                }
+                ShowActivePanel();
             }
-            if (RadGrid1.EditIndexes.Count > 0)
-            {
-                pnlProducts.Visible = true;
-            }
+        }
+
+
+        private void ShowActivePanel()
+        {
+            pnlCategories.Visible = ActivePanel == "Categories";
+            pnlBrands.Visible = ActivePanel == "Brands";
+            pnlProducts.Visible = ActivePanel == "Products";
+            pnlinsert.Visible = ActivePanel == "Insert";
+        
         }
         private string ActivePanel
         {
@@ -67,7 +57,7 @@ namespace sazegar_project
                 // مسیر نسبی برای ذخیره در دیتابیس
                 imagepath = "pic/" + fileName;
             }
-                SqlDataSource2.InsertParameters["name"].DefaultValue =pronameinput.Text;
+            SqlDataSource2.InsertParameters["name"].DefaultValue = pronameinput.Text;
             SqlDataSource2.InsertParameters["category"].DefaultValue = procategoryinput.Text;
             SqlDataSource2.InsertParameters["brand"].DefaultValue = probrandinput.Text;
             SqlDataSource2.InsertParameters["supplier"].DefaultValue = prosupplierinput.Text;
@@ -81,7 +71,7 @@ namespace sazegar_project
         private DataTable GetSampleData()
         {
             DataTable dt = new DataTable();
-            
+
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 SqlCommand cmd = new SqlCommand("SELECT * FROM proname", conn);
@@ -89,7 +79,7 @@ namespace sazegar_project
                 da.Fill(dt); // dt الان از دیتابیس پر می‌شود
             }
 
-       
+
             foreach (DataRow row in dt.Rows)
             {
                 string name = row["name"].ToString();
@@ -156,54 +146,53 @@ namespace sazegar_project
                 }
                 BindGrid();
             }
-            if (e.CommandName == "Edit")
+            if (e.CommandName == "CustomEdit")
             {
                 int id = Convert.ToInt32(((GridDataItem)e.Item).GetDataKeyValue("id"));
+                DataTable dt = GetSampleData();
+                DataRow row = dt.Select("id=" + id).FirstOrDefault();
+
+                if (row != null)
+                {
+                    hfEditId.Value = id.ToString();
+                    txtEditName.Text = row["name"].ToString();
+                    txtEditCategory.Text = row["category"].ToString();
+                    txtEditBrand.Text = row["brand"].ToString();
+                    txtEditSupplier.Text = row["supplier"].ToString();
+                    txtEditStock.Text = row["stock"].ToString();
+                    txtEditStatus.Text = row["status"].ToString();
+
+                    pnlEdit.Visible = true;
+                }
             }
         }
-        protected void RadGrid1_UpdateCommand(object sender, Telerik.Web.UI.GridCommandEventArgs e)
+        protected void btnSaveEdit_Click(object sender, EventArgs e)
         {
-            GridEditableItem editedItem = e.Item as GridEditableItem;
-            int id = (int)editedItem.GetDataKeyValue("id");
-            string name = (editedItem["name"].Controls[0] as TextBox).Text;
-            string brand = (editedItem["brand"].Controls[0] as TextBox).Text;
-            string category = (editedItem["category"].Controls[0] as TextBox).Text;
-            string supplier = (editedItem["supplier"].Controls[0] as TextBox).Text;
-            string stock = (editedItem["stock"].Controls[0] as TextBox).Text;
-            string status = (editedItem["status"].Controls[0] as TextBox).Text;
-            string imagePath = (editedItem["image"].Controls[0] as TextBox).Text;
-            FileUpload fileUpload = editedItem.FindControl("fileUploadEdit") as FileUpload;
-            if (fileUpload != null && fileUpload.HasFile)
-            {
-                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(fileUpload.FileName);
-                string savePath = Server.MapPath("~/pic/") + fileName;
-                fileUpload.SaveAs(savePath);
-                imagePath = "pic/" + fileName;
-            }
+            int id = int.Parse(hfEditId.Value);
+
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 string query = @"UPDATE proname 
-                         SET name=@name, brand=@brand, category=@category, supplier=@supplier, 
-                             stock=@stock, status=@status, image=@image
-                         WHERE id=@id";
+             SET name=@name, category=@category, brand=@brand, supplier=@supplier,
+                 stock=@stock, status=@status
+             WHERE id=@id";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@name", name);
-                cmd.Parameters.AddWithValue("@brand", brand);
-                cmd.Parameters.AddWithValue("@category", category);
-                cmd.Parameters.AddWithValue("@supplier", supplier);
-                cmd.Parameters.AddWithValue("@stock", stock);
-                cmd.Parameters.AddWithValue("@status", status);
-                cmd.Parameters.AddWithValue("@image", imagePath);
+                cmd.Parameters.AddWithValue("@name", txtEditName.Text);
+                cmd.Parameters.AddWithValue("@category", txtEditCategory.Text);
+                cmd.Parameters.AddWithValue("@brand", txtEditBrand.Text);
+                cmd.Parameters.AddWithValue("@supplier", txtEditSupplier.Text);
+                cmd.Parameters.AddWithValue("@stock", txtEditStock.Text);
+                cmd.Parameters.AddWithValue("@status", txtEditStatus.Text);
                 cmd.Parameters.AddWithValue("@id", id);
 
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
-            pnlProducts.Visible = true;
-            BindGrid();
-            
-        }
 
+            pnlEdit.Visible = false;
+           
+            BindGrid(); 
+        }
     }
 }
